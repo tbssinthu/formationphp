@@ -23,13 +23,34 @@
                         $sql='SELECT * FROM cours';
                         $stmt= $pdo->prepare($sql);
                         $stmt->execute();
-                        $cours= $stmt->fetchAll(PDO::FETCH_ASSOC);
-                        echo '<pre>';
-                        print_r($cours);
+                        $formation= $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        //echo '<pre>';
+                        //print_r($formation);
          ?>
 
      </div>
-
+<div class="row">
+    <?php foreach($formation as $f):?>
+        <div class="col-sm-4">
+    <div class="card" style="width: 18rem;">
+  <img src="uploads/<?=$f['image'] ?>" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title"><?=$f['libelle']?></h5>
+    <p class="card-text"><?=$f['description']?></p>
+    <?php 
+    $query= 'SELECT libelle FROM type WHERE idType=:idType';
+    $stmt= $pdo->prepare($query);
+    $stmt->bindValue(":idType", $f['idType'],PDO::PARAM_INT);
+    $stmt->execute();
+    $types= $stmt->fetch(PDO::FETCH_ASSOC);
+    ?>
+    <span class="badge bg-secondary"><?= $type['libelle'] ?></span>
+    
+  </div>
+</div>
+    </div>
+    <?php endforeach;?>
+</div>
     </div>
 
 
