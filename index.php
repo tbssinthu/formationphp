@@ -44,7 +44,7 @@
     $stmt->execute();
     $types= $stmt->fetch(PDO::FETCH_ASSOC);
     ?>
-    <span class="badge bg-secondary"><?= $type['libelle'] ?></span>
+    <span class="badge bg-secondary"><?= $types['libelle'] ?></span>
     
   </div>
 </div>
